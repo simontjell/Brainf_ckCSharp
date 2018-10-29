@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace BF1
+namespace Brainf_ckCSharp
 {
     public class Interpreter
     {
