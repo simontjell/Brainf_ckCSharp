@@ -7,7 +7,7 @@ namespace Brainf_ckCSharp
     public class Parser
     {
         public enum Commands {
-            IncrementDataPointer,
+            IncrementDataPointer = 0,
             DecrementDataPointer,
             IncrementDataValue,
             DecrementDataValue,
@@ -17,36 +17,36 @@ namespace Brainf_ckCSharp
             IfNonZero
         }
 
-        public IList<Commands> Parse(string program)
-            => Validate(program.Select(Parse).Where(c => c.HasValue).Select(c => c.Value).ToList());
+        public Program Parse(string input)
+            => Validate(new Program(input.Select(Parse).Where(c => c != null).ToList()));
 
-        private Commands? Parse(char command){
+        private Command Parse(char command){
             switch(command){
-                case '>': return Commands.IncrementDataPointer;
-                case '<': return Commands.DecrementDataPointer;
-                case '+': return Commands.IncrementDataValue;
-                case '-': return Commands.DecrementDataValue;
-                case '.': return Commands.PrintDataValue;
-                case ',': return Commands.ReadDataValue;
-                case '[': return Commands.IfZero;
-                case ']': return Commands.IfNonZero;
-                default:
-                    if(char.IsWhiteSpace(command)) 
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        throw new Exception("Unhandled command: " + command);
-                    }
+                case '>': return new IncrementDataPointerCommand();
+                case '<': return new DecrementDataPointerCommand();
+                case '+': return new IncrementDataValueCommand();
+                case '-': return new DecrementDataValueCommand();
+                case '.': return new PrintDataValueCommand();
+                case ',': return new ReadDataValueCommand();
+                case '[': return new IfZeroCommand();
+                case ']': return new IfNonZeroCommand();
+        default:
+                if(char.IsWhiteSpace(command)) 
+                {
+                    return null;
+                }
+                else
+                {
+                    throw new Exception("Unhandled command: " + command);
+                }
             }
         }
 
-        private IList<Commands> Validate(IList<Commands> program){
-            if(program.Where(c => c == Commands.IfZero).Count() != program.Where(c => c == Commands.IfNonZero).Count())
-            {
-                throw new Exception("Expected the same number of ['s and ]'s");
-            }
+        private Program Validate(Program program){
+            //if(program.Where(c => c == Commands.IfZero).Count() != program.Where(c => c == Commands.IfNonZero).Count())
+            //{
+            //    throw new Exception("Expected the same number of ['s and ]'s");
+            //}
 
             return program;
         }

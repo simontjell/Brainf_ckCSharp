@@ -1,20 +1,20 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using static Brainf_ckCSharp.Parser;
 
 namespace Brainf_ckCSharp
 {
-    // https://en.wikipedia.org/wiki/Brainfuck
-    class Program
+  public class Program
+  {
+    public Program(IList<Command> commands)
     {
-        static void Main(string[] args)
-        {
-            new Interpreter(
-                Console.OpenStandardInput(), 
-                Console.OpenStandardOutput()
-            )
-            .Interpret(
-                new Parser()
-                .Parse(TestPrograms.HelloWorld)
-            );
-        }
+      Commands = commands;
     }
+
+    public IList<Command> Commands { get; }
+
+    public int Length => Commands.Count;
+
+    public Command this[int index]
+      => Commands[index];
+  }
 }

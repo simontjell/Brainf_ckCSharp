@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Brainf_ckCSharp
 {
-    abstract class TestPrograms
+    public static class TestPrograms
     {
         public const string HelloWorld = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.";
 
