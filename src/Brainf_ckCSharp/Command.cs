@@ -131,5 +131,4 @@ namespace Brainf_ckCSharp
       return (char)b;
     }
   }
-
 }

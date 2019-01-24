@@ -33,15 +33,7 @@ namespace Brainf_ckCSharp
         case ',': return new ReadDataValueCommand();
         case '[': return new IfZeroCommand();
         case ']': return new IfNonZeroCommand();
-        default:
-          if (Char.IsWhiteSpace(command))
-          {
-            return null;
-          }
-          else
-          {
-            throw new ParserException("Unhandled command: " + command);
-          }
+        default: return null;
       }
     }
 
