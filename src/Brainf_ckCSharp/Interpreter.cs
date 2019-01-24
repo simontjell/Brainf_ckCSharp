@@ -10,15 +10,15 @@ namespace Brainf_ckCSharp
         private readonly Stream _inputStream;
         private readonly Stream _outputStream;
 
-        public Interpreter(Stream inputStream, Stream outputStream)
+        public Interpreter(Stream inputStream = null, Stream outputStream = null)
         {
-            _inputStream = inputStream;
-            _outputStream = outputStream;
+            _inputStream = inputStream ?? Console.OpenStandardInput();
+            _outputStream = outputStream ?? Console.OpenStandardOutput();
         }
         // Idea: For longer running programs, it would probably be more efficient to translate into C# and compile it
         // ...or to translate directly to IL 
 
-        public void Interpret(Program program, IList<char> initialBuffer = null, TimeSpan? maxRunTime = null)
+        public void Interpret(ParsedProgram program, IList<char> initialBuffer = null, TimeSpan? maxRunTime = null)
         {
             var state = new State(initialBuffer);
             

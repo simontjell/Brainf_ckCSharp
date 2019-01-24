@@ -8,7 +8,7 @@ namespace Brainf_ckCSharp
   public class Context
   {
     public State State { get; set; }
-    public Program Program { get; set; }
+    public ParsedProgram Program { get; set; }
     public Stream InputStream { get; set; }
     public Stream OutputStream { get; set; }
   }

@@ -17,8 +17,8 @@ namespace Brainf_ckCSharp
             IfNonZero
         }
 
-        public Program Parse(string input)
-            => Validate(new Program(input.Select(Parse).Where(c => c != null).ToList()));
+        public ParsedProgram Parse(string input)
+            => Validate(new ParsedProgram(input.Select(Parse).Where(c => c != null).ToList()));
 
         private Command Parse(char command){
             switch(command){
@@ -42,7 +42,7 @@ namespace Brainf_ckCSharp
             }
         }
 
-        private Program Validate(Program program){
+        private ParsedProgram Validate(ParsedProgram program){
             //if(program.Where(c => c == Commands.IfZero).Count() != program.Where(c => c == Commands.IfNonZero).Count())
             //{
             //    throw new Exception("Expected the same number of ['s and ]'s");

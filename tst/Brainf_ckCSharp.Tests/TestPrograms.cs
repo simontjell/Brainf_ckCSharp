@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Brainf_ckCSharp
+namespace Brainf_ckCSharp.Tests
 {
     public static class TestPrograms
     {
