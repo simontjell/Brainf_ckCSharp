@@ -56,7 +56,7 @@ namespace Brainf_ckCSharp.Cli
     {
       try
       {
-        new Interpreter().Interpret(
+        new Interpreter(Console.OpenStandardInput(), Console.OpenStandardOutput()).Interpret(
           new Brainf_ckCSharp.Parser().Parse(program),
           maxRunTime: options.RunTime.HasValue ? (TimeSpan?)TimeSpan.FromSeconds(options.RunTime.Value) : null
         );
