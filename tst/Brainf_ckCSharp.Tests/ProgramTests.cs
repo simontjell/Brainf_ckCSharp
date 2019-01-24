@@ -12,17 +12,15 @@ namespace Brainf_ckCSharp.Tests
     [InlineData(TestPrograms.Fibonacci, "0\n1\n1\n2\n3\n5\n8\n13\n21\n34\n55\n89\n", 5)]
     [InlineData(TestPrograms.HelloWorld, "Hello World!\n")]
     [InlineData(TestPrograms.Comment, "")]
-    public void When_test_programs_are_executed_the_expected_output_is_produced(string program, string expectedOutput, int? maxRunTime = null)
+    public void When_test_programs_are_executed_the_expected_output_is_produced(string program, string expectedOutput, int? maxRunTimeInSeconds = null)
     {
       // Arrange
-      var sut = new Interpreter();
+      var sut = new SimpleInterpreter();
+      var maxRunTime = maxRunTimeInSeconds.HasValue ? (TimeSpan?)TimeSpan.FromSeconds(maxRunTimeInSeconds.Value) : null;
 
       // Act
-      var actualOutput = 
-        sut
-        .Interpret(new Parser().Parse(program), maxRunTime: maxRunTime.HasValue ? (TimeSpan?)TimeSpan.FromSeconds(maxRunTime.Value) : null)
-        .ReadOutput();
-      
+      var actualOutput = sut.Run(program, maxRunTime: maxRunTime);
+
       // Assert
       Assert.StartsWith(expectedOutput, actualOutput);
     }
