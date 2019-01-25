@@ -17,6 +17,6 @@ var output =
 ...or by using the combined parser/interpreter like this:
 ```csharp
 var output = 
-    new SimpleInterpreter()
+    new SimpleInterpreter(new Interpreter(), new Parser())
     .Run("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
 ```
