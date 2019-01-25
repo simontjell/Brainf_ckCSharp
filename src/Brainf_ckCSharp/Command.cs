@@ -5,46 +5,39 @@ using System.Text;
 
 namespace Brainf_ckCSharp
 {
-  public class Context
-  {
-    public State State { get; set; }
-    public ParsedProgram Program { get; set; }
-    public Stream InputStream { get; set; }
-    public Stream OutputStream { get; set; }
-  }
 
   public abstract class Command
   {
-    public abstract State Execute(Context context);
+    public abstract IState Execute(IContext context);
   }
 
   public class IncrementDataPointerCommand : Command
   {
-    public override State Execute(Context context)
+    public override IState Execute(IContext context)
       => context.State.WithUpdatedDataPointer(+1);
   }
 
   public class DecrementDataPointerCommand : Command
   {
-    public override State Execute(Context context)
+    public override IState Execute(IContext context)
       => context.State.WithUpdatedDataPointer(-1);
   }
 
   public class IncrementDataValueCommand : Command
   {
-    public override State Execute(Context context)
+    public override IState Execute(IContext context)
       => context.State.WithUpdatedDataValue(1);
   }
 
   public class DecrementDataValueCommand : Command
   {
-    public override State Execute(Context context)
+    public override IState Execute(IContext context)
       => context.State.WithUpdatedDataValue(-1);
   }
 
   public class IfZeroCommand : Command
   {
-    public override State Execute(Context context)
+    public override IState Execute(IContext context)
     {
       if (context.State.TestValue(value => value == 0))
       {
@@ -76,7 +69,7 @@ namespace Brainf_ckCSharp
 
   public class IfNonZeroCommand : Command
   {
-    public override State Execute(Context context)
+    public override IState Execute(IContext context)
     {
       if (context.State.TestValue(value => value != 0))
       {
@@ -109,7 +102,7 @@ namespace Brainf_ckCSharp
 
   public class PrintDataValueCommand : Command
   {
-    public override State Execute(Context context)
+    public override IState Execute(IContext context)
     {
       WriteChar(context.OutputStream, context.State.GetDataValueOrZero());
       return context.State;
@@ -121,7 +114,7 @@ namespace Brainf_ckCSharp
 
   public class ReadDataValueCommand : Command
   {
-    public override State Execute(Context context)
+    public override IState Execute(IContext context)
       => context.State.WithUpdatedDataValue(ReadChar(context.InputStream));
 
     private char ReadChar(Stream inputStream)

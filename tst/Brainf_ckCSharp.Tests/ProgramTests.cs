@@ -15,7 +15,7 @@ namespace Brainf_ckCSharp.Tests
     public void When_test_programs_are_executed_the_expected_output_is_produced(string program, string expectedOutput, int? maxRunTimeInSeconds = null)
     {
       // Arrange
-      var sut = new SimpleInterpreter();
+      var sut = new SimpleInterpreter(new Interpreter(), new Parser());
       var maxRunTime = maxRunTimeInSeconds.HasValue ? (TimeSpan?)TimeSpan.FromSeconds(maxRunTimeInSeconds.Value) : null;
 
       // Act

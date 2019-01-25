@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Brainf_ckCSharp
 {
-  public class Interpreter : IDisposable
+  public class Interpreter : IDisposable, IInterpreter
   {
     private readonly Stream _inputStream;
     private readonly Stream _outputStream;
@@ -27,11 +27,11 @@ namespace Brainf_ckCSharp
       }
     }
 
-    public Interpreter Interpret(ParsedProgram program, IList<char> initialBuffer = null, TimeSpan? maxRunTime = null)
+    public IInterpreter Interpret(IParsedProgram program, IList<char> initialBuffer = null, TimeSpan? maxRunTime = null)
     {
       try
       {
-        var state = new State(initialBuffer);
+        IState state = new State(initialBuffer);
 
         var startTime = DateTime.Now;
         var endTime = maxRunTime.HasValue ? startTime.Add(maxRunTime.Value) : DateTime.MaxValue;

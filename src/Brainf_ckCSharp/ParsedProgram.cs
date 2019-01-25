@@ -3,7 +3,7 @@ using static Brainf_ckCSharp.Parser;
 
 namespace Brainf_ckCSharp
 {
-  public class ParsedProgram
+  public class ParsedProgram : IParsedProgram
   {
     public ParsedProgram(IList<Command> commands)
     {

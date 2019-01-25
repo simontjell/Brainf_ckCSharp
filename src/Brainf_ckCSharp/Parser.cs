@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Brainf_ckCSharp
 {
-  public class Parser
+  public class Parser : IParser
   {
     public enum Commands
     {
