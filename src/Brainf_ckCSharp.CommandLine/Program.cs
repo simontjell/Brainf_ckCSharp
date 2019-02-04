@@ -45,7 +45,7 @@ namespace Brainf_ckCSharp.Cli
 
       if(String.IsNullOrEmpty(options.Program) == false)
       {
-        return RunProgram(options.Program, options);
+        return RunProgram(options.Program?.Trim('\"') ?? string.Empty, options);
       }
 
       Console.Error.WriteLine("Please provide either a path for a file containing a program or a program as a string");
